@@ -53,4 +53,16 @@ public class InventorySystem : MonoBehaviour
             }
         }
     }
+
+    public bool HasItem(InventoryItemData _itemToCheck)
+    {
+        if(inventoryDictionary.TryGetValue(_itemToCheck , out InventoryItem inventoryItemSlotOut) == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

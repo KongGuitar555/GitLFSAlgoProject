@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class InventoryToggle : MonoBehaviour
 {
+
+    public static InventoryToggle instance;
+
     public GameObject inventoryUIPanel;
 
     public bool inventoryOpen;
 
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -35,8 +42,7 @@ public class InventoryToggle : MonoBehaviour
         inventoryUIPanel.SetActive(false);
         inventoryOpen = false;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        LockAndHideCursor();
     }
 
     public void OpenInventoryPanel()
@@ -45,8 +51,19 @@ public class InventoryToggle : MonoBehaviour
         InventorySystem.instance.onInventoryChanged?.Invoke(InventorySystem.instance);
         inventoryOpen = true;
 
+        UnlockandShowCursor();
+
+    }
+
+    public void LockAndHideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void UnlockandShowCursor()
+    {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-
     }
 }
