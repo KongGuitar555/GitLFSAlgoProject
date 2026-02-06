@@ -8,6 +8,8 @@ public class InventoryToggle : MonoBehaviour
 
     public bool inventoryOpen;
 
+    
+
     private void Start()
     {
         CloseInventoryPanel();
@@ -32,6 +34,9 @@ public class InventoryToggle : MonoBehaviour
     {
         inventoryUIPanel.SetActive(false);
         inventoryOpen = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void OpenInventoryPanel()
@@ -39,6 +44,9 @@ public class InventoryToggle : MonoBehaviour
         inventoryUIPanel.SetActive(true);
         InventorySystem.instance.onInventoryChanged?.Invoke(InventorySystem.instance);
         inventoryOpen = true;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
 
     }
 }
